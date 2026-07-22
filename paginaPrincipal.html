@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompraYA</title>
+    <link rel="icon" href="../CRMA/img/icon.png">
+
+    <script src="js/tema.js"></script>
+    <script src="js/script_paginaPrincipal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="css/tema.css">
+
+    <style>
+        @keyframes aparecer {
+            from {
+                transform: scale(0.92) translateY(8px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .line-clamp-2-title {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-[var(--bg)] text-[var(--ink)] min-h-screen flex flex-col pt-[86px] max-[720px]:pt-[150px] transition-colors duration-300">
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none" aria-hidden="true">
+        <symbol id="youtube" viewBox="0 0 256 180">
+            <path d="M250.346 28.075A32.18 32.18 0 0 0 227.69 5.418C207.824 0 127.87 0 127.87 0S47.912.164 28.046 5.582A32.18 32.18 0 0 0 5.39 28.24c-6.009 35.298-8.34 89.084.165 122.97a32.18 32.18 0 0 0 22.656 22.657c19.866 5.418 99.822 5.418 99.822 5.418s79.955 0 99.82-5.418a32.18 32.18 0 0 0 22.657-22.657c6.338-35.348 8.291-89.1-.164-123.134Z" fill="red" />
+            <path fill="#FFF" d="m102.421 128.06 66.328-38.418-66.328-38.418z" />
+        </symbol>
+        <symbol id="github" viewBox="0 0 1024 1024">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#fff" />
+        </symbol>
+        <symbol id="facebook" viewBox="0 0 320 512">
+            <path fill="#ffffff" d="M279.14 288l14.22-92.66h-88.91V134.41c0-25.35 12.42-50.06 52.24-50.06H297V5.82S259.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+        </symbol>
+        <symbol id="instagram" viewBox="0 0 256 256">
+            <path fill="#fff" d="M128 23.064c34.177 0 38.225.13 51.722.745 12.48.57 19.258 2.655 23.769 4.408 5.974 2.322 10.238 5.096 14.717 9.575 4.48 4.479 7.253 8.743 9.575 14.717 1.753 4.511 3.838 11.289 4.408 23.768.615 13.498.745 17.546.745 51.723 0 34.178-.13 38.226-.745 51.723-.57 12.48-2.655 19.257-4.408 23.768-2.322 5.974-5.096 10.239-9.575 14.718-4.479 4.479-8.743 7.253-14.717 9.574-4.511 1.753-11.289 3.839-23.769 4.408-13.495.616-17.543.746-51.722.746-34.18 0-38.228-.13-51.723-.746-12.48-.57-19.257-2.655-23.768-4.408-5.974-2.321-10.239-5.095-14.718-9.574-4.479-4.48-7.253-8.744-9.574-14.718-1.753-4.51-3.839-11.288-4.408-23.768-.616-13.497-.746-17.545-.746-51.723 0-34.177.13-38.225.746-51.722.57-12.48 2.655-19.258 4.408-23.769 2.321-5.974 5.095-10.238 9.574-14.717 4.48-4.48 8.744-7.253 14.718-9.575 4.51-1.753 11.289-3.838 23.768-4.408 13.497-.615 17.545-.745 51.723-.745M128 0C93.237 0 88.878.147 75.226.77c-13.625.622-22.93 2.786-31.071 5.95-8.418 3.271-15.556 7.648-22.672 14.764C14.367 28.6 9.991 35.738 6.72 44.155 3.555 52.297 1.392 61.602.77 75.226.147 88.878 0 93.237 0 128c0 34.763.147 39.122.77 52.774.622 13.625 2.785 22.93 5.95 31.071 3.27 8.417 7.647 15.556 14.763 22.672 7.116 7.116 14.254 11.492 22.672 14.763 8.142 3.165 17.446 5.328 31.07 5.95 13.653.623 18.012.77 52.775.77s39.122-.147 52.774-.77c13.624-.622 22.929-2.785 31.07-5.95 8.418-3.27 15.556-7.647 22.672-14.763 7.116-7.116 11.493-14.254 14.764-22.672 3.164-8.142 5.328-17.446 5.95-31.07.623-13.653.77-18.012.77-52.775s-.147-39.122-.77-52.774c-.622-13.624-2.786-22.929-5.95-31.07-3.271-8.418-7.648-15.556-14.764-22.672C227.4 14.368 220.262 9.99 211.845 6.72c-8.142-3.164-17.447-5.328-31.071-5.95C167.122.147 162.763 0 128 0Zm0 62.27C91.698 62.27 62.27 91.7 62.27 128c0 36.302 29.428 65.73 65.73 65.73 36.301 0 65.73-29.428 65.73-65.73 0-36.301-29.429-65.73-65.73-65.73Zm0 108.397c-23.564 0-42.667-19.103-42.667-42.667S104.436 85.333 128 85.333s42.667 19.103 42.667 42.667-19.103 42.667-42.667 42.667Zm83.686-110.994c0 8.484-6.876 15.36-15.36 15.36-8.483 0-15.36-6.876-15.36-15.36 0-8.483 6.877-15.36 15.36-15.36 8.484 0 15.36 6.877 15.36 15.36Z" />
+        </symbol>
+        <symbol id="tiktok" viewBox="0 0 448 512">
+            <path fill="#fff" d="M448 209.9c-44.7 0-87.2-13.2-123-37.7v177.2c0 89.9-73 162.6-162.8 162.6S0 439.3 0 349.4s73-162.6 162.8-162.6c11.6 0 22.9 1.2 34 3.6v88.5c-10.5-3.9-21.7-6-34-6-46.1 0-83.5 37.3-83.5 83.4s37.4 83.4 83.5 83.4 83.5-37.3 83.5-83.4V0h84.9c4.4 37.8 20.4 72.1 45.8 98.2 25.4 26.1 59.4 43.1 96.9 47.5v64.2z" />
+        </symbol>
+    </svg>
+
+
+    <header class="bg-[var(--header-bg)] text-[var(--header-text)] px-7 py-4 flex items-center justify-between flex-wrap gap-4
+                    fixed top-0 left-0 w-full z-[1000] border-b-[3px] border-[var(--green)]
+                    transition-colors duration-300
+                    max-[720px]:justify-center max-[720px]:text-center">
+
+        <div onclick="recargarPagina()"
+            class="font-['Arial_Black',_Arial,_sans-serif] text-[22px] tracking-[0.5px] m-0 flex items-center gap-2.5
+                   h-12 leading-[48px] cursor-pointer select-none transition-transform duration-150 ease-out
+                   hover:scale-[1.04] active:scale-[0.96] motion-reduce:transition-none
+                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">
+            CompraYA
+            <img src="../CRMA/img/icon.png" alt="Logo" class="h-[38px] w-auto rounded-lg">
+        </div>
+
+        <div class="flex gap-0 flex-1 max-w-[560px] min-w-[200px]">
+            <input type="text" id="buscarProducto" placeholder="Buscar productos..." oninput="filtrarPorTexto()"
+                class="flex-1 px-4 py-[11px] border-none rounded-l-md font-sans text-sm bg-[var(--bg)] text-[var(--ink)]
+                       placeholder:text-[var(--muted)] transition-colors duration-300
+                       focus:outline focus:outline-2 focus:outline-[var(--green)] focus:outline-offset-[-2px]
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">
+            <button onclick="filtrarPorTexto()" type="button" aria-label="Buscar"
+                class="border-none bg-[var(--green)] text-white px-[18px] py-[11px] rounded-r-md cursor-pointer
+                       text-[15px] transition-colors duration-150 hover:bg-[var(--green-dark)] motion-reduce:transition-none
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">🔍</button>
+        </div>
+
+        <nav
+            class="flex items-center gap-[22px] flex-wrap max-[720px]:order-2 max-[720px]:justify-center max-[720px]:w-full">
+            <a href="paginaPrincipal.html"
+                class="text-[var(--header-text)] no-underline font-semibold text-sm relative pb-1 hover:text-[var(--header-accent)] transition-colors duration-300
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Inicio</a>
+            <a href="#" onclick="abrirAgregarProducto(event)"
+                class="text-[var(--header-text)] no-underline font-semibold text-sm relative pb-1 hover:text-[var(--header-accent)] transition-colors duration-300
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">➕ Agregar producto</a>
+            <a href="#" onclick="abrirCarrito(event)"
+                class="text-[var(--header-text)] no-underline font-semibold text-sm relative pb-1 hover:text-[var(--header-accent)] transition-colors duration-300
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">
+                🛒 Carrito (<span id="contadorCarrito"
+                    class="bg-[var(--orange)] text-white rounded-full px-2 py-px text-xs font-bold">0</span>)
+            </a>
+            <a href="#" onclick="cerrarSesion(event)"
+                class="text-[var(--header-text)] no-underline font-semibold text-sm relative pb-1 hover:text-[var(--header-accent)] transition-colors duration-300
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Cerrar sesión</a>
+
+            <button id="botonTema" onclick="alternarTema()" aria-label="Cambiar entre modo claro y oscuro"
+                type="button"
+                class="relative w-10 h-10 shrink-0 rounded-full border border-[var(--border)] bg-[var(--bg-soft)]
+                       flex items-center justify-center cursor-pointer
+                       transition-[transform,background-color,border-color] duration-200
+                       hover:scale-110 hover:rotate-12 active:scale-90
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-2">
+                <svg id="iconoSol" class="absolute w-5 h-5 text-[var(--orange)] transition-all duration-500"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path
+                        d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4">
+                    </path>
+                </svg>
+                <svg id="iconoLuna"
+                    class="absolute w-5 h-5 text-[var(--green)] opacity-0 rotate-90 scale-50 transition-all duration-500"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <section class="text-center pt-14 px-6 pb-12 bg-[var(--bg-soft)] border-b border-dashed border-[var(--border)] relative transition-colors duration-300">
+        <h1
+            class="font-['Arial_Black',_Arial,_sans-serif] text-[clamp(28px,5vw,46px)] text-[var(--ink)] mb-[14px] tracking-[-0.5px] transition-colors duration-300">
+            Mejores ofertas del 2026 💗</h1>
+        <p class="text-base text-[var(--muted)] font-medium transition-colors duration-300">Compra barato. Compra rápido. CompraYa</p>
+
+        <div class="flex items-center justify-center gap-2.5 mt-5">
+            <label for="ordenPrecio" class="text-sm font-bold text-[var(--ink)] transition-colors duration-300">Ordenar por:</label>
+            <select id="ordenPrecio" onchange="filtrarPorPrecio()" class="px-3 py-[9px] border border-[var(--border)] rounded-lg bg-[var(--surface)] text-[var(--ink)] text-sm font-sans cursor-pointer transition-colors duration-300
+                       focus:outline focus:outline-2 focus:outline-[var(--green)] focus:outline-offset-[-2px]">
+                <option value="defecto">Relevancia</option>
+                <option value="asc">Precio: menor a mayor</option>
+                <option value="desc">Precio: mayor a menor</option>
+            </select>
+        </div>
+    </section>
+
+    <section
+        class="flex-1 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-7 px-7 py-12 max-w-[1320px] mx-auto w-full"
+        id="contenedorProductos">
+
+        <div class="card bg-[var(--surface)] border border-[var(--border)] rounded-xl text-left flex flex-col relative overflow-visible
+                    transition-[transform,box-shadow] duration-200 pt-1.5
+                    hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(26,26,26,0.1)] motion-reduce:transition-none"
+            data-precio="39.90">
+            <div class="producto-info cursor-pointer px-[14px] pt-[14px]" onclick="abrirModal('Auriculares Pro', 'Auriculares Pro con Cancelación de Ruido', 
+            'S/ 39.90', '../CRMA/img/AuricularesPro.jpg')">
+                <img src="../CRMA/img/AuricularesPro.jpg" alt="Auriculares Pro"
+                    class="w-full h-[200px] object-contain rounded-lg bg-[var(--bg-soft)] p-[10px]">
+                <h2
+                    class="line-clamp-2-title font-['Arial',_Helvetica,_sans-serif] font-bold text-base mt-3 text-[var(--ink)] min-h-[42px] leading-[1.3]">
+                    Auriculares Pro</h2>
+            </div>
+            <p
+                class="mt-3 mx-[14px] font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[19px] text-[var(--green-dark)] inline-flex items-center gap-1.5
+                      before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-[var(--orange)] before:inline-block">
+                S/ 39.90</p>
+            <button onclick="comprar('Auriculares Pro', 39.90, '../CRMA/img/AuricularesPro.jpg')"
+                class="m-[14px] mt-4 font-sans text-sm font-bold bg-[var(--green)] text-white border-none p-3 rounded-lg
+                       cursor-pointer transition-colors duration-150 hover:bg-[var(--green-dark)] active:scale-[0.97]
+                       motion-reduce:transition-none
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Comprar</button>
+        </div>
+
+        <div class="card bg-[var(--surface)] border border-[var(--border)] rounded-xl text-left flex flex-col relative overflow-visible
+                    transition-[transform,box-shadow] duration-200 pt-1.5
+                    hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(26,26,26,0.1)] motion-reduce:transition-none"
+            data-precio="99.90">
+            <div class="producto-info cursor-pointer px-[14px] pt-[14px]" onclick="abrirModal('Reloj SmartWatch', 
+            'Reloj SmartWatch con compatibilidad Bluetooth, carga portatil, ideal para controlar algunas acciones de tu celular.', 
+            'S/ 99.90', '../CRMA/img/SmartWatch.jpg')">
+                <img src="../CRMA/img/SmartWatch.jpg" alt="SmartWatch"
+                    class="w-full h-[200px] object-contain rounded-lg bg-[var(--bg-soft)] p-[10px]">
+                <h2
+                    class="line-clamp-2-title font-['Arial',_Helvetica,_sans-serif] font-bold text-base mt-3 text-[var(--ink)] min-h-[42px] leading-[1.3]">
+                    Reloj SmartWatch</h2>
+            </div>
+            <p
+                class="mt-3 mx-[14px] font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[19px] text-[var(--green-dark)] inline-flex items-center gap-1.5
+                      before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-[var(--orange)] before:inline-block">
+                S/ 99.90</p>
+            <button onclick="comprar('Reloj SmartWatch', 99.90, '../CRMA/img/SmartWatch.jpg')"
+                class="m-[14px] mt-4 font-sans text-sm font-bold bg-[var(--green)] text-white border-none p-3 rounded-lg
+                       cursor-pointer transition-colors duration-150 hover:bg-[var(--green-dark)] active:scale-[0.97]
+                       motion-reduce:transition-none
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Comprar</button>
+        </div>
+
+        <div class="card bg-[var(--surface)] border border-[var(--border)] rounded-xl text-left flex flex-col relative overflow-visible
+                    transition-[transform,box-shadow] duration-200 pt-1.5
+                    hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(26,26,26,0.1)] motion-reduce:transition-none"
+            data-precio="49.90">
+            <div class="producto-info cursor-pointer px-[14px] pt-[14px]" onclick="abrirModal('Tiras LED RGB', 
+            'Tiras LED RGB con colores y velocidad ajustables, ideal para decoración de ambientes.',
+            'S/ 49.90', '../CRMA/img/TirasLEDRGB.jpg')">
+                <img src="../CRMA/img/TirasLEDRGB.jpg" alt="Tiras LED RGB"
+                    class="w-full h-[200px] object-contain rounded-lg bg-[var(--bg-soft)] p-[10px]">
+                <h2
+                    class="line-clamp-2-title font-['Arial',_Helvetica,_sans-serif] font-bold text-base mt-3 text-[var(--ink)] min-h-[42px] leading-[1.3]">
+                    Tiras LED RGB</h2>
+            </div>
+            <p
+                class="mt-3 mx-[14px] font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[19px] text-[var(--green-dark)] inline-flex items-center gap-1.5
+                      before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-[var(--orange)] before:inline-block">
+                S/ 49.90</p>
+            <button onclick="comprar('Tiras LED RGB', 49.90, '../CRMA/img/TirasLEDRGB.jpg')"
+                class="m-[14px] mt-4 font-sans text-sm font-bold bg-[var(--green)] text-white border-none p-3 rounded-lg
+                       cursor-pointer transition-colors duration-150 hover:bg-[var(--green-dark)] active:scale-[0.97]
+                       motion-reduce:transition-none
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Comprar</button>
+        </div>
+
+        <div class="card bg-[var(--surface)] border border-[var(--border)] rounded-xl text-left flex flex-col relative overflow-visible
+                    transition-[transform,box-shadow] duration-200 pt-1.5
+                    hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(26,26,26,0.1)] motion-reduce:transition-none"
+            data-precio="158.90">
+
+            <div class="producto-info cursor-pointer px-[14px] pt-[14px]" onclick="abrirModal('Mouse Gamer', 
+            'Mouse Gamer Logitech G502 Hero, ideal para gaming y tareas complejas. <br><br><a href=&quot;https://www.logitechg.com/es-ar/software/ghub&quot; target=&quot;_blank&quot;>Descargar Logitech G HUB</a>',
+            'S/ 158.90', '../CRMA/img/MouseGamer.jpeg')">
+                <img src="../CRMA/img/MouseGamer.jpeg" alt="Mouse Gamer"
+                    class="w-full h-[200px] object-contain rounded-lg bg-[var(--bg-soft)] p-[10px]">
+                <h2
+                    class="line-clamp-2-title font-['Arial',_Helvetica,_sans-serif] font-bold text-base mt-3 text-[var(--ink)] min-h-[42px] leading-[1.3]">
+                    Mouse Gamer</h2>
+            </div>
+
+            <p
+                class="mt-3 mx-[14px] font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[19px] text-[var(--green-dark)] inline-flex items-center gap-1.5
+                      before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-[var(--orange)] before:inline-block">
+                S/ 158.90</p>
+            <button onclick="comprar('Mouse Gamer', 158.90, '../CRMA/img/MouseGamer.jpeg')"
+                class="m-[14px] mt-4 font-sans text-sm font-bold bg-[var(--green)] text-white border-none p-3 rounded-lg
+                       cursor-pointer transition-colors duration-150 hover:bg-[var(--green-dark)] active:scale-[0.97]
+                       motion-reduce:transition-none
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Comprar</button>
+        </div>
+
+        <div class="card bg-[var(--surface)] border border-[var(--border)] rounded-xl text-left flex flex-col relative overflow-visible
+                    transition-[transform,box-shadow] duration-200 pt-1.5
+                    hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(26,26,26,0.1)] motion-reduce:transition-none"
+            data-precio="85.90">
+            <div class="producto-info cursor-pointer px-[14px] pt-[14px]" onclick="abrirModal('Peluche de Goku Ultra Instinto Dominado', 
+            'Peluche de Goku Ultra Instinto Dominado, ideal para coleccionistas y fans de Dragon Ball.',
+            'S/ 85.90', '../CRMA/img/gokuUIDPeluche.jpg')">
+                <img src="../CRMA/img/gokuUIDPeluche.jpg" alt="Peluche de Goku Ultra Instinto Dominado"
+                    class="w-full h-[200px] object-contain rounded-lg bg-[var(--bg-soft)] p-[10px]">
+                <h2
+                    class="line-clamp-2-title font-['Arial',_Helvetica,_sans-serif] font-bold text-base mt-3 text-[var(--ink)] min-h-[42px] leading-[1.3]">
+                    Peluche de Goku Ultra Instinto Dominado</h2>
+            </div>
+            <p
+                class="mt-3 mx-[14px] font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[19px] text-[var(--green-dark)] inline-flex items-center gap-1.5
+                      before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-[var(--orange)] before:inline-block">
+                S/ 85.90</p>
+            <button
+                onclick="comprar('Peluche de Goku Ultra Instinto Dominado', 85.90, '../CRMA/img/gokuUIDPeluche.jpg')"
+                class="m-[14px] mt-4 font-sans text-sm font-bold bg-[var(--green)] text-white border-none p-3 rounded-lg
+                       cursor-pointer transition-colors duration-150 hover:bg-[var(--green-dark)] active:scale-[0.97]
+                       motion-reduce:transition-none
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Comprar</button>
+        </div>
+
+        <div class="card bg-[var(--surface)] border border-[var(--border)] rounded-xl text-left flex flex-col relative overflow-visible
+                    transition-[transform,box-shadow] duration-200 pt-1.5
+                    hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(26,26,26,0.1)] motion-reduce:transition-none"
+            data-precio="64.90">
+            <div class="producto-info cursor-pointer px-[14px] pt-[14px]" onclick="abrirModal('Sartén Antiadherente', 
+            'Sartén Antiadherente, resistente y fácil de limpiar, ideal para el día a día en la cocina.',
+            'S/ 64.90', '../CRMA/img/sartenAntiadherente.jpg')">
+                <img src="../CRMA/img/sartenAntiadherente.jpg" alt="Sarten Antiadherente"
+                    class="w-full h-[200px] object-contain rounded-lg bg-[var(--bg-soft)] p-[10px]">
+                <h2
+                    class="line-clamp-2-title font-['Arial',_Helvetica,_sans-serif] font-bold text-base mt-3 text-[var(--ink)] min-h-[42px] leading-[1.3]">
+                    Sartén Antiadherente</h2>
+            </div>
+            <p
+                class="mt-3 mx-[14px] font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[19px] text-[var(--green-dark)] inline-flex items-center gap-1.5
+                      before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-[var(--orange)] before:inline-block">
+                S/ 64.90</p>
+            <button onclick="comprar('Sartén Antiadherente', 64.90, '../CRMA/img/sartenAntiadherente.jpg')"
+                class="m-[14px] mt-4 font-sans text-sm font-bold bg-[var(--green)] text-white border-none p-3 rounded-lg
+                       cursor-pointer transition-colors duration-150 hover:bg-[var(--green-dark)] active:scale-[0.97]
+                       motion-reduce:transition-none
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Comprar</button>
+        </div>
+    </section>
+
+    <footer
+        class="text-center p-[22px] bg-[var(--header-bg)] text-[var(--header-text)] text-[13px] mt-[60px] border-t-[3px] border-[var(--green)] transition-colors duration-300">
+
+        <div class="flex items-center justify-center flex-wrap gap-3.5 mb-4">
+
+            <a href="https://www.youtube.com/@titanpy4395" target="_blank" rel="noopener noreferrer"
+                aria-label="YouTube" class="bg-white p-2 size-12
+                flex justify-center items-center hover:bg-red-700 rounded-full hover:scale-110 transition-transform">
+                <svg width="28" height="28">
+                    <use xlink:href="#youtube" />
+                </svg>
+            </a>
+
+            <a href="https://github.com/TitanPY" target="_blank" rel="noopener noreferrer"
+                aria-label="GitHub" class="bg-gray-800 p-2 size-12
+                flex justify-center items-center hover:bg-gray-600 rounded-full hover:scale-110 transition-transform">
+                <svg width="28" height="28">
+                    <use xlink:href="#github" />
+                </svg>
+            </a>
+
+            <a href="https://web.facebook.com/mauricio.antonio.castillo.rodriguez" target="_blank"
+                rel="noopener noreferrer" aria-label="Facebook" class="bg-blue-600 p-2 size-12
+                flex justify-center items-center hover:bg-blue-700 rounded-full hover:scale-110 transition-transform">
+                <svg width="28" height="28" class="fill-white">
+                    <use xlink:href="#facebook" />
+                </svg>
+            </a>
+
+            <a href="https://www.instagram.com/titanpy_yt/" target="_blank" rel="noopener noreferrer"
+                aria-label="Instagram"
+                class="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-2 size-12 flex justify-center items-center hover:opacity-90 rounded-full hover:scale-110 transition-transform">
+                <svg width="28" height="28">
+                    <use xlink:href="#instagram" />
+                </svg>
+            </a>
+
+            <a href="https://www.tiktok.com/@titanpis" target="_blank" rel="noopener noreferrer"
+                aria-label="TikTok" class="bg-gradient-to-tr from-cyan-400 via-black to-pink-500 p-2 size-12
+                flex justify-center items-center hover:opacity-90 rounded-full hover:scale-110 transition-transform">
+                <svg width="28" height="28">
+                    <use xlink:href="#tiktok" />
+                </svg>
+            </a>
+
+        </div>
+
+        <p>© 2026 CompraYA - Mejores ofertas del 2026.</p>
+    </footer>
+
+    <div id="modalProducto"
+        class="modal hidden fixed inset-0 w-full h-full bg-[var(--overlay)] justify-center items-center z-[2000] p-5">
+
+        <div class="modal-contenido bg-[var(--surface)] w-[480px] max-w-full p-7 rounded-[14px] text-left relative border border-[var(--border)]
+                    animate-[aparecer_0.25s_ease] motion-reduce:animate-none">
+
+            <span
+                class="cerrar absolute top-[14px] right-[18px] text-[26px] leading-none cursor-pointer text-[var(--muted)]
+                        transition-colors duration-150 hover:text-[var(--orange)] motion-reduce:transition-none
+                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]"
+                onclick="cerrarModal()">&times;</span>
+
+            <img id="modalImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt=""
+                class="w-full max-h-[280px] object-contain rounded-[10px] bg-[var(--bg-soft)] p-3 transition-colors duration-300">
+
+            <h2 id="modalTitulo"
+                class="font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[22px] mt-[18px] text-[var(--ink)]"></h2>
+
+            <p id="modalDescripcion"
+                class="text-[var(--muted)] text-sm leading-[1.6] mt-2.5 [&amp;_a]:text-[var(--green)] [&amp;_a]:font-semibold [&amp;_a]:underline">
+            </p>
+
+            <p id="modalPrecio"
+                class="font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[22px] text-[var(--green-dark)] mt-3.5">
+            </p>
+
+        </div>
+
+    </div>
+
+    <div id="modalCarrito"
+        class="modal hidden fixed inset-0 w-full h-full bg-[var(--overlay)] justify-center items-center z-[2000] p-5">
+
+        <div class="modal-contenido bg-[var(--surface)] w-[480px] max-w-full p-7 rounded-[14px] text-left relative border border-[var(--border)]
+                    animate-[aparecer_0.25s_ease] motion-reduce:animate-none">
+
+            <span
+                class="cerrar absolute top-[14px] right-[18px] text-[26px] leading-none cursor-pointer text-[var(--muted)]
+                        transition-colors duration-150 hover:text-[var(--orange)] motion-reduce:transition-none
+                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]"
+                onclick="cerrarCarrito()">&times;</span>
+
+            <h2 class="font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[22px] mt-[18px] text-[var(--ink)]">Tu
+                carrito</h2>
+
+            <div id="listaCarrito" class="mt-4 max-h-[320px] overflow-y-auto flex flex-col gap-3"></div>
+
+            <p id="totalCarrito"
+                class="mt-[18px] font-['Arial',_Helvetica,_sans-serif] font-extrabold text-xl text-[var(--green-dark)] text-right">
+            </p>
+
+        </div>
+
+    </div>
+
+    <div id="modalAgregarProducto"
+        class="modal hidden fixed inset-0 w-full h-full bg-[var(--overlay)] justify-center items-center z-[2000] p-5">
+
+        <div class="modal-contenido bg-[var(--surface)] w-[480px] max-w-full p-7 rounded-[14px] text-left relative border border-[var(--border)]
+                    animate-[aparecer_0.25s_ease] motion-reduce:animate-none">
+
+            <span
+                class="cerrar absolute top-[14px] right-[18px] text-[26px] leading-none cursor-pointer text-[var(--muted)]
+                        transition-colors duration-150 hover:text-[var(--orange)] motion-reduce:transition-none
+                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]"
+                onclick="cerrarAgregarProducto()">&times;</span>
+
+            <h2 class="font-['Arial',_Helvetica,_sans-serif] font-extrabold text-[22px] mt-[18px] text-[var(--ink)]">
+                Agregar producto</h2>
+
+            <form id="formAgregarProducto" onsubmit="agregarProducto(event)" class="flex flex-col gap-1.5 mt-4">
+
+                <label for="nuevoNombre" class="text-[13px] font-bold text-[var(--ink)] mt-2.5">Nombre del producto</label>
+                <input type="text" id="nuevoNombre" placeholder="Ej. Lámpara LED" required class="px-[13px] py-[11px] border border-[var(--border)] rounded-lg text-sm font-sans bg-[var(--bg)] text-[var(--ink)]
+                           focus:outline-none focus:border-[var(--green)] focus:shadow-[0_0_0_3px_rgba(31,122,83,0.12)]">
+
+                <label for="nuevaDescripcion" class="text-[13px] font-bold text-[var(--ink)] mt-2.5">Descripción</label>
+                <input type="text" id="nuevaDescripcion" placeholder="Breve descripción del producto" required class="px-[13px] py-[11px] border border-[var(--border)] rounded-lg text-sm font-sans bg-[var(--bg)] text-[var(--ink)]
+                           focus:outline-none focus:border-[var(--green)] focus:shadow-[0_0_0_3px_rgba(31,122,83,0.12)]">
+
+                <label for="nuevoPrecio" class="text-[13px] font-bold text-[var(--ink)] mt-2.5">Precio (S/)</label>
+                <input type="number" id="nuevoPrecio" placeholder="Ej. 49.90" step="0.01" min="0" required class="px-[13px] py-[11px] border border-[var(--border)] rounded-lg text-sm font-sans bg-[var(--bg)] text-[var(--ink)]
+                           focus:outline-none focus:border-[var(--green)] focus:shadow-[0_0_0_3px_rgba(31,122,83,0.12)]">
+
+                <label for="nuevaImagen" class="text-[13px] font-bold text-[var(--ink)] mt-2.5">URL de la imagen</label>
+                <input type="text" id="nuevaImagen" placeholder="https://..." required class="px-[13px] py-[11px] border border-[var(--border)] rounded-lg text-sm font-sans bg-[var(--bg)] text-[var(--ink)]
+                           focus:outline-none focus:border-[var(--green)] focus:shadow-[0_0_0_3px_rgba(31,122,83,0.12)]">
+
+                <button type="submit"
+                    class="btn-agregar-producto mt-4 bg-[var(--green)] text-white border-none p-[13px] rounded-lg text-[15px]
+                           font-bold font-sans cursor-pointer transition-colors duration-150 hover:bg-[var(--green-dark)]
+                           active:scale-[0.98] motion-reduce:transition-none
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-[3px]">Publicar
+                    producto</button>
+
+            </form>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+/*
+  Paleta como variables CSS. La clase .dark (aplicada al <html> por tema.js)
+  las redefine. Casi todo en el HTML usa transition-colors, así que cambiar
+  de tema ANIMA los colores en vez de saltar de golpe — algo que Tailwind
+  "dark:" por sí solo no puede hacer, porque ahí se intercambian clases
+  completas y el navegador no puede interpolar entre dos clases distintas.
+*/
+:root {
+    --bg: #FDF8F0;
+    --bg-soft: #F7F0E3;
+    --surface: #FFFFFF;
+    --ink: #1A1A1A;
+    --muted: #5C5648;
+    --border: #DCD3BF;
+    --green: #1F7A53;
+    --green-dark: #15573B;
+    --orange: #E8552E;
+    --header-bg: #1A1A1A;
+    --header-text: #FDF8F0;
+    --header-accent: #FBE4D9;
+    --overlay: rgba(26, 26, 26, 0.55);
+    --shadow-color: rgba(26, 26, 26, 0.12);
+}
+
+.dark {
+    --bg: #10161A;
+    --bg-soft: #182024;
+    --surface: #1C2529;
+    --ink: #F2EEE4;
+    --muted: #A6A093;
+    --border: #2E3A3F;
+    --green: #34C98D;
+    --green-dark: #23A876;
+    --orange: #FF8259;
+    --header-bg: #0B0E10;
+    --header-text: #F2EEE4;
+    --header-accent: #FFD9C2;
+    --overlay: rgba(0, 0, 0, 0.75);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes entrar {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tarjetaAparece {
+    from { opacity: 0; transform: translateY(14px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes aparecer {
+    from { transform: scale(0.92) translateY(8px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Estas 4 reglas dependen de clases de ESTADO que el JS agrega/quita
+   (.activo / .derecha), así que Tailwind no las puede generar solo. */
+.selector-btn.activo { color: #FFFFFF; }
+.indicador.derecha { transform: translateX(100%); }
+.formulario { display: none; }
+.formulario.activo { display: flex; animation: entrar 0.3s ease; }
+
+.modal-contenido { animation: aparecer 0.25s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, .indicador, .formulario, .btn-enviar, .tarjeta, .card, .logo, .modal-contenido {
+        transition: none !important;
+        animation: none !important;
+    }
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompraYA - Registro</title>
+    <link rel="icon" href="../CRMA/img/icon.png">
+
+    <script src="js/tema.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="css/tema.css">
+</head>
+
+<body class="min-h-screen font-sans transition-colors duration-300 bg-[var(--bg)] text-[var(--ink)]">
+
+    <div
+        class="min-h-screen flex items-center justify-center px-4 py-8
+                bg-[var(--bg)] transition-colors duration-300
+                bg-[repeating-linear-gradient(45deg,color-mix(in_srgb,var(--green)_6%,transparent)_0px,color-mix(in_srgb,var(--green)_6%,transparent)_2px,transparent_2px,transparent_14px)]">
+
+        <div
+            class="tarjeta relative w-full max-w-[420px] bg-[var(--surface)] border border-[var(--border)] rounded-2xl
+                    px-6 pt-9 pb-7 sm:px-8
+                    shadow-[0_20px_50px_var(--shadow-color)]
+                    transition-colors duration-300
+                    animate-[tarjetaAparece_0.5s_ease_forwards]
+                    before:content-[''] before:absolute before:top-0 before:left-0 before:right-0
+                    before:h-1 before:rounded-t-2xl before:bg-gradient-to-r before:from-[var(--green)] before:to-[var(--orange)]">
+
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2.5">
+                    <img src="../CRMA/img/icon.png" alt="Logo" class="h-8 w-auto rounded-lg">
+                    <span
+                        class="font-black tracking-wide text-xl text-[var(--ink)] transition-colors duration-300">CompraYA</span>
+                </div>
+
+                <button id="botonTema" onclick="alternarTema()" aria-label="Cambiar entre modo claro y oscuro"
+                    class="relative w-10 h-10 shrink-0 rounded-full border border-[var(--border)] bg-[var(--bg-soft)]
+                           flex items-center justify-center cursor-pointer
+                           transition-[transform,background-color,border-color] duration-200
+                           hover:scale-110 hover:rotate-12 active:scale-90
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-2">
+                    <svg id="iconoSol" class="absolute w-5 h-5 text-[var(--orange)] transition-all duration-500"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path
+                            d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4">
+                        </path>
+                    </svg>
+                    <svg id="iconoLuna"
+                        class="absolute w-5 h-5 text-[var(--green)] opacity-0 rotate-90 scale-50 transition-all duration-500"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div
+                class="selector relative flex bg-[var(--bg-soft)] border border-[var(--border)] rounded-[10px] p-1 mb-6 transition-colors duration-300">
+                <button id="btnIniciar"
+                    class="selector-btn activo relative z-[2] flex-1 bg-transparent border-none
+                            py-2.5 px-2 text-sm font-bold text-[var(--muted)] rounded-[7px] cursor-pointer
+                            transition-colors duration-[250ms] ease-in-out
+                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-2"
+                    onclick="mostrarFormulario('iniciar')">
+                    Iniciar Sesión
+                </button>
+                <button id="btnRegistrar"
+                    class="selector-btn relative z-[2] flex-1 bg-transparent border-none
+                            py-2.5 px-2 text-sm font-bold text-[var(--muted)] rounded-[7px] cursor-pointer
+                            transition-colors duration-[250ms] ease-in-out
+                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-2"
+                    onclick="mostrarFormulario('registrar')">
+                    Registrarse
+                </button>
+                <span id="indicador"
+                    class="indicador absolute top-1 left-1 w-[calc(50%-4px)] h-[calc(100%-8px)]
+                            bg-[var(--green)] rounded-[7px] z-[1]
+                            transition-[transform,background-color] duration-300 [transition-timing-function:cubic-bezier(0.65,0,0.35,1)]"></span>
+            </div>
+
+            <div class="relative overflow-hidden">
+
+                <form id="formIniciar" class="formulario activo flex-col gap-1.5" onsubmit="iniciarSesion(event)">
+                    <label for="loginUsuario"
+                        class="text-[13px] font-bold text-[var(--ink)] mt-2.5 transition-colors duration-300">Usuario o
+                        correo</label>
+                    <input type="text" id="loginUsuario" placeholder="tu_usuario" autocomplete="username" required
+                        class="py-2.5 px-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--bg)] text-[var(--ink)]
+                               placeholder-[var(--muted)] outline-none transition-colors duration-300
+                               focus:border-[var(--green)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--green)_18%,transparent)]">
+
+                    <label for="loginPassword"
+                        class="text-[13px] font-bold text-[var(--ink)] mt-2.5 transition-colors duration-300">Contraseña</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"
+                        required
+                        class="py-2.5 px-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--bg)] text-[var(--ink)]
+                               placeholder-[var(--muted)] outline-none transition-colors duration-300
+                               focus:border-[var(--green)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--green)_18%,transparent)]">
+
+                    <p id="errorIniciar"
+                        class="text-[var(--orange)] text-[13px] font-semibold min-h-[16px] mt-2.5 transition-colors duration-300">
+                    </p>
+
+                    <button type="submit"
+                        class="btn-enviar mt-3.5 bg-[var(--green)] text-white border-none py-3 rounded-lg
+                                text-[15px] font-bold cursor-pointer
+                                transition-[background-color,transform] duration-150 ease-in-out
+                                hover:bg-[var(--green-dark)] hover:shadow-lg active:scale-[0.98]
+                                focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-2">
+                        Entrar a CompraYA
+                    </button>
+                </form>
+
+                <form id="formRegistrar" class="formulario flex-col gap-1.5" onsubmit="registrarUsuario(event)">
+                    <label for="regNombre"
+                        class="text-[13px] font-bold text-[var(--ink)] mt-2.5 transition-colors duration-300">Nombre
+                        completo</label>
+                    <input type="text" id="regNombre" placeholder="María Pérez" required
+                        class="py-2.5 px-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--bg)] text-[var(--ink)]
+                               placeholder-[var(--muted)] outline-none transition-colors duration-300
+                               focus:border-[var(--green)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--green)_18%,transparent)]">
+
+                    <label for="regUsuario"
+                        class="text-[13px] font-bold text-[var(--ink)] mt-2.5 transition-colors duration-300">Usuario</label>
+                    <input type="text" id="regUsuario" placeholder="maria_p" required
+                        class="py-2.5 px-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--bg)] text-[var(--ink)]
+                               placeholder-[var(--muted)] outline-none transition-colors duration-300
+                               focus:border-[var(--green)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--green)_18%,transparent)]">
+
+                    <label for="regCorreo"
+                        class="text-[13px] font-bold text-[var(--ink)] mt-2.5 transition-colors duration-300">Correo</label>
+                    <input type="email" id="regCorreo" placeholder="maria@correo.com" required
+                        class="py-2.5 px-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--bg)] text-[var(--ink)]
+                               placeholder-[var(--muted)] outline-none transition-colors duration-300
+                               focus:border-[var(--green)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--green)_18%,transparent)]">
+
+                    <label for="regPassword"
+                        class="text-[13px] font-bold text-[var(--ink)] mt-2.5 transition-colors duration-300">Contraseña</label>
+                    <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" minlength="6" required
+                        class="py-2.5 px-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--bg)] text-[var(--ink)]
+                               placeholder-[var(--muted)] outline-none transition-colors duration-300
+                               focus:border-[var(--green)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--green)_18%,transparent)]">
+
+                    <p id="errorRegistrar"
+                        class="text-[var(--orange)] text-[13px] font-semibold min-h-[16px] mt-2.5 transition-colors duration-300">
+                    </p>
+                    <p id="exitoRegistrar"
+                        class="text-[var(--green)] text-[13px] font-semibold min-h-[16px] -mt-1 transition-colors duration-300">
+                    </p>
+
+                    <button type="submit"
+                        class="btn-enviar mt-3.5 bg-[var(--green)] text-white border-none py-3 rounded-lg
+                                text-[15px] font-bold cursor-pointer
+                                transition-[background-color,transform] duration-150 ease-in-out
+                                hover:bg-[var(--green-dark)] hover:shadow-lg active:scale-[0.98]
+                                focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--orange)] focus-visible:outline-offset-2">
+                        Crear mi cuenta
+                    </button>
+                </form>
+
+            </div>
+
+            <p class="text-center text-xs text-[var(--muted)] mt-5 transition-colors duration-300">Compra barato. Compra
+                rápido. CompraYA</p>
+
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
